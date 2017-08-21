@@ -1,3 +1,4 @@
+
     var command = process.argv[2];
     var fs = require('fs');
     var categoryInput = '';
@@ -35,6 +36,8 @@
 
         function callBackData(err, data, response) {
             for (var i = 0; i < data.length; i++) {
+                console.log('TWEET: ' + data[i].text, '\nTIME TWEETED: ' + data[i].created_at);
+                console.log('////////////////////////////////////////////////////');
                 logData('TWEET: ' + data[i].text, '\nTIME TWEETED: ' + data[i].created_at);
                 logData('////////////////////////////////////////////////////');
             }
@@ -56,6 +59,8 @@
                 }
                 var itemsArr = track.tracks.items;
                 for (var i = 0; i < track.tracks.items.length; i++) {
+                    console.log('ALBUM: ' + itemsArr[i].album.name, '\nARTIST: ' + itemsArr[i].album.artists[0].name, '\nSONG: ' + itemsArr[i].name, '\nLINK: ' + itemsArr[i].preview_url);
+                    console.log('////////////////////////////////////////////////////');
                     logData('ALBUM: ' + itemsArr[i].album.name, '\nARTIST: ' + itemsArr[i].album.artists[0].name, '\nSONG: ' + itemsArr[i].name, '\nLINK: ' + itemsArr[i].preview_url);
                     logData('////////////////////////////////////////////////////');
                 }
@@ -68,6 +73,8 @@
                 }
                 var itemsArr = track.tracks.items;
                 for (var i = 0; i < track.tracks.items.length; i++) {
+                    console.log('ALBUM: ' + itemsArr[i].album.name, '\nARTIST: ' + itemsArr[i].album.artists[0].name, '\nSONG: ' + itemsArr[i].name, '\nLINK: ' + itemsArr[i].preview_url);
+                    console.log('////////////////////////////////////////////////////');
                     logData('ALBUM: ' + itemsArr[i].album.name, '\nARTIST: ' + itemsArr[i].album.artists[0].name, '\nSONG: ' + itemsArr[i].name, '\nLINK: ' + itemsArr[i].preview_url);
                     logData('////////////////////////////////////////////////////');
                 }
@@ -83,6 +90,13 @@
             queryUrl = "http://www.omdbapi.com/?t=Mr.Nobody&y=&plot=short&apikey=40e9cece";
             request(queryUrl, function(error, response, body) {
                 if (!error && response.statusCode === 200) {
+                	console.log("The movie name: " + JSON.parse(body).Title);
+                    console.log("The movie year: " + JSON.parse(body).Year);
+                    console.log("The IMDB rating: " + JSON.parse(body).imdbRating);
+                    console.log("Made in: " + JSON.parse(body).Country);
+                    console.log("The language: " + JSON.parse(body).Language);
+                    console.log("The Plot: " + JSON.parse(body).Plot);
+                    console.log("The cast: " + JSON.parse(body).Actors);
                     logData("The movie name: " + JSON.parse(body).Title);
                     logData("The movie year: " + JSON.parse(body).Year);
                     logData("The IMDB rating: " + JSON.parse(body).imdbRating);
@@ -96,6 +110,13 @@
             queryUrl = "http://www.omdbapi.com/?t=" + categoryInput + "&y=&plot=short&apikey=40e9cece";
             request(queryUrl, function(error, response, body) {
                 if (!error && response.statusCode === 200) {
+                		console.log("The movie name: " + JSON.parse(body).Title);
+                    console.log("The movie year: " + JSON.parse(body).Year);
+                    console.log("The IMDB rating: " + JSON.parse(body).imdbRating);
+                    console.log("Made in: " + JSON.parse(body).Country);
+                    console.log("The language: " + JSON.parse(body).Language);
+                    console.log("The Plot: " + JSON.parse(body).Plot);
+                    console.log("The cast: " + JSON.parse(body).Actors);
                     logData("The movie name: " + JSON.parse(body).Title);
                     logData("The movie year: " + JSON.parse(body).Year);
                     logData("The IMDB rating: " + JSON.parse(body).imdbRating);
@@ -124,7 +145,7 @@
     }
 
             function logData(keyword) {
-            	console.log(keyword);
+            	// console.log(keyword);
         fs.appendFile('log.txt', keyword + '\r\n', function(err) {
                 if (err) {
                     console.log(err);
